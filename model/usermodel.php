@@ -1,57 +1,6 @@
 <?php
-//     require_once('db.php');
-//     {
-
-//     $name= $_REQUEST['name'];
-//     $email= $_REQUEST['email'];
-//     $username= $_REQUEST['username'];
-//     $password= $_REQUEST['password'];
-//     $user = mysqli_fetch_assoc($result);
-        
-//     if(count($user) > 0){
-//         return true;
-//     }else{
-//         return false;
-//     }
-// }
-
-//     function managerSignUp($user)
-//     {
-//         global $name;
-//         global $email;
-//         global $username;
-//         global $password;
-
-//         $con= getConnection();
-//         $sql= "INSERT INTO anotherdb VALUES('$name','$email','$username', $password)";
-
-//         $result= mysqli_query($con, $sql);
-
-//         if($result)
-//         {
-//             return true;
-//         }
-//         else{
-//             return false;
-//         }
-//      }
-
-
-
 require_once('db.php');
-//session_start();
-// function checkUserExists($username) {
-//     $con = getConnection();
-//     $sql = "SELECT * FROM anotherdb WHERE username = '$username'";
-//     $result = mysqli_query($con, $sql);
-//     $user = mysqli_fetch_assoc($result);
-    
-//     if ($user) {
-//         return true;
-//     } else {
-//         return false;
-//     }
-// }
+
 
 function signup($username, $name, $email, $password, $gender, $dob, $userType)
  {
@@ -69,7 +18,7 @@ function signup($username, $name, $email, $password, $gender, $dob, $userType)
 function login($username, $password)
 {
     $con = getConnection();
-    $sql = "select * from userInfo where username='{$username}' and password='{$password}'";
+    $sql = "select * from userinfo where username='{$username}' and password='{$password}'";
     $result = mysqli_query($con, $sql);
     $cnt= mysqli_num_rows($result);
 
@@ -83,6 +32,52 @@ function login($username, $password)
     else{
         return false;
     }
+}
+function getAllUser(){
+    $con = getConnection();
+    $sql = "select * from userinfo";
+    $result = mysqli_query($con, $sql);
+    $users = [];
+    
+    while($user = mysqli_fetch_assoc($result)){
+        array_push($users, $user);
+    }
+    return $users;
+}
+
+function updateuserinfo($name,$email,$gender,$dob,$username) // edit prof
+{
+    $con = getConnection();
+    $sql = "UPDATE userinfo SET name = '$name', email = '$email', gender = '$gender', dob = '$dob' WHERE username = '$username'";
+    $result = mysqli_query($con, $sql);
+    if($result)
+    {
+        return true;
+    }
+    else {
+        return false;
+    }
+
+    
+    function updatePassword ($username, $newPassword) // for change password 
+    {
+        $con = getConnection();
+        $sql = "UPDATE userinfo SET password = '$newPassword' WHERE username = '$username'";
+        $result = mysqli_query($con, $sql);
+
+        if ($result)
+        {
+            return true;
+        }
+        else 
+        {
+            return false;
+        }
+    }
+    
+
+    
+
 }
 ?> 
 

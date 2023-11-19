@@ -1,7 +1,7 @@
 <?php
-     include('../model/db.php');
+     include('../controller/setTaskPrioritycheck.php');
+     //$userSession = $_SESSION['user']['username'];
     ?>
-     
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,118 +12,61 @@
     </style>
 </head>
 <body>
-    <form method="POST" action="">
         <table border="1" align="center" width="70%" height="100%">
-            <tr>
-                <th colspan="2">
-                    <h1>Collaborative Task Management</h1>
-                    <p>Logged in as <a href="logout.php">Logout</a></p>
-                </th>
-            </tr>
+        <tr> <th colspan="2"> <bold><h1> Collaborative task management </h1></bold> <a href="../controller/logout.php"> Logout </a></th></tr>
+
+    </tr>
             <tr>
                 <td width="30%">
-                    <p>Accounts</p>
-                    <hr>
-                    <ul>
-                        <li><a href="./managerDashboard.php">Dashboard</a></li>
-                        <li><a href="./setTask.php">Set Task</a>
-                            <ul>
-                                <li><a href="./setTaskPriority.php">Set Task Priority</a></li>
-                                <li><a href="./updateTaskDeadline.php">Update Task Deadline</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="./viewprojects.php">View Projects</a></li>
-                        <li><a href="./currentWork.php">Current Work</a></li>
-                        <li><a href="./manageTeam.php">Manage Team</a></li>
-                        <li><a href="./viewprof.php">View Profile</a></li>
-                        <li><a href="./editprof.php">Edit Profile</a></li>
-                        <li><a href="./changeprofpic.php">Change Profile Photo</a></li>
-                        <li><a href="./changepass.php">Change Password</a></li>
-                    </ul>
+                    Accounts
+                    <hr></hr>
+         <ul>
+          <li> <a href="./managerDashboard.php"> Dasboard </a> </li>
+          <li> <a href="./setTask.php"> Set task </a> </li>
+          <div>
+            <ul>
+                <li> <a href="./setTaskPriority.php"> Set task priority </a> </li>
+                <li> <a href="./updateTaskDeadline.php"> Update task deadline </a> </li>
+            </ul>
+            </div>
+          <li> <a href="./viewprojects.php"> View projects </a> </li>
+          <!-- <li> <a href="./currentWork.php"> Current work </a> </li> -->
+          <li> <a href="./manageTeam.php"> Manage team </a> </li>
+          <li> <a href="./viewprof.php"> View profile </a> </li>
+          <li> <a href="./editprof.php"> Edit profile </a> </li>
+          <!-- <li> <a href="./changeprofpic.php"> Change profile photo </a> </li> -->
+          <li> <a href="./changepass.php"> Change password </a> </li>
                 </td>
+
+                <form method="POST" action="">
                 <td width="70%">
                     <div>
                         <h2>Set Task Priority</h2>
                     </div>
                     <h3>All current tasks:</h3>
-                   
 
-                   <!-- to show the data's from assignmanager table -->
-                   <?php
-                   $con = getConnection();
-                    $sql = "SELECT am.projectName, am.projectType, am.projectDetails
-                                   FROM adminproject AS am
-                                   JOIN assignmanager AS p ON p.projectId = am.projectId
-                                   WHERE p.username = 'fabliha'";
-                    $result= mysqli_query($con, $sql);
+                    <?php  $projects = displayAllProjectInfo(); ?>
+                    <?php  $projectNames = getProjectName();
+                           $projectTypes = getProjectType();
+                        ?> <hr>
 
-                    if ($result) {
-                        while ($row_data = mysqli_fetch_assoc($result)) {
-                            echo "Project Name: " . $row_data['projectName'] . "<br>";
-                            echo "Project Type: " . $row_data['projectType'] . "<br>";
-                            echo "Details     : " . $row_data['projectDetails'] . "<br><br>";
-                        }
-                    } else {
-                        echo "Error: " . mysqli_error($con);
-                    }
-                    ?>
-
-                        
-                        <select name="project_name" id="">   
+                    <select name="project_name">
                         <option value="">Select Project Name</option>
-                           
-                           <?php
-                           $con = getConnection();
-                           $result = mysqli_query($con, $sql);
+                        <?php foreach ($projectNames as $projectName) : ?>
+                            <option value="<?= $projectName ?>"><?= $projectName ?></option>
+                        <?php endforeach; ?>
+                    </select>
 
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                $project_name = $row['projectName'];
-                                echo "<option value='$project_name'>$project_name</option>";}
-                            ?>   
-                        </select>
+                    <select name="project_type">
+                    <option value="">Select Project Type</option>
+                    <?php foreach ($projectTypes as $projectType) : ?>
+                        <option value="<?= $projectType ?>"><?= $projectType ?></option>
+                        <?php endforeach; ?>
+                    </select>
 
-
-                        <select name="project_type" id="">                          
-                        <option value="">Select Project Type</option>
-                            
-                            <?php
-                            $con = getConnection();
-                            $result = mysqli_query($con, $sql);
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                $project_type = $row['projectType'];
-                                echo "<option value='$project_type'>$project_type</option>";}
-                            ?>
-
-                        </select>
-
-                            
-
-
-                        <b>Set Priority:</b> <input type="text" name="priority_task" value="" /><br><br>
-                        <b>Set Deadline:</b> <input type="date" name="deadline" value="" /><br><br>
-                        <input type="reset" name="" value="Reset" /> <input type="submit" name="insert_project" value="Submit" />
-
-                        <?php
-                        $con = getConnection();
-                        if (isset($_POST['insert_project'])) {
-                        $project_name = $_POST['project_name'];
-                        $project_type = $_POST['project_type'];
-                        $priority_task = $_POST['priority_task'];
-                        $deadline = $_POST['deadline'];
-                    
-                        $insert_query = "INSERT INTO setpriority (project_name, project_type, priority_task, deadline) 
-                                        VALUES ('$project_name', '$project_type', '$priority_task', '$deadline')";
-                        
-                        $result = mysqli_query($con, $insert_query);
-                    
-                        if ($result) {
-                            echo "Task priority and deadline inserted successfully";
-                        } else {
-                            echo "Error: " . mysqli_error($con);
-                        }
-                        }
-                         ?>
-                    
+                    <b>Set Priority:</b> <input type="text" name="priority_task" value="" /><br><br>
+                    <b>Set Deadline:</b> <input type="date" name="deadline" value="" /><br><br>
+                    <input type="reset" name="" value="Reset" /> <input type="submit" name="insert_project" value="Submit" /><br><br>
                 </td>
             </tr>
             <tr align="center">

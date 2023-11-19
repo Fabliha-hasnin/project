@@ -1,17 +1,25 @@
 <?php
-include('../model/db.php');
+session_start();
+require_once('../model/operationmodel.php');
+
+// $projects = displayAllProjectInfo();
+// $projectNames = getProjectName();
+// $projectTypes = getProjectType(); // Fetch project types
 
 if (isset($_POST['insert_project'])) {
-    $project_name = $_POST['Project_name'];
-    $project_type = $_POST['Project_type']; 
-    $priority_task = $_POST['priority_task'];
-    $insert_query = "INSERT INTO project (project_name, project_type, priority_task) VALUES ('$project_name', '$project_type', '$priority_task')"; // Added commas
-    $result = mysqli_query($con, $insert_query);
+    $projectName = $_POST['project_name'];
+    $projectType = $_POST['project_type'];
+    $priorityTask = $_POST['priority_task'];
+    $deadline = $_POST['deadline'];
 
-    if ($result) {
-        echo "Project entered successfully";
+    $inserted = insertTaskPriority($projectName, $projectType, $priorityTask, $deadline);
+
+    if ($inserted) {
+        echo "Task priority and deadline inserted successfully";
     } else {
-        echo "Error: " . mysqli_error($con);
+        echo "Error: Failed to insert task priority";
     }
 }
+
 ?>
+

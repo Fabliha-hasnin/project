@@ -1,10 +1,5 @@
- 
-<?php
-    // $con=mysqli_connect('localhost','root', '', 'collaborative_task_management');
-    // if(!$con){
-    //     die(mysqli_error($con));
-    // } 
-
+ <?php
+     
     $dbhost= "localhost";
     $dbname= "collaborative_task_management";
     $dbuser= "root";
