@@ -47,12 +47,12 @@ $projectTaskInfo = getAllTaskInfo();
                             Project Name: <?php echo $projectTaskInfo[$i]['project_name']; ?><br>
                             Project Type: <?php echo $projectTaskInfo[$i]['project_type']; ?><br>
                             Priority Task: <?php echo $projectTaskInfo[$i]['priority_task']; ?><br>
-                            Deadline: <?php echo $projectTaskInfo[$i]['deadline']; ?><br> 
+                            Deadline: <?php echo $projectTaskInfo[$i]['deadline']; ?><br> <hr>
                         <?php }?>
                 </td>
             </tr>
             <tr align="center">
-                <td colspan="2">Copyright &copy; 2017</td>
+                <td colspan="2">Copyright c 2023</td>
             </tr>
         </table>
     </form>

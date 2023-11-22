@@ -9,7 +9,7 @@
 
     $username = $_SESSION['user']['username'];
 
-    $updateInfo= updateuserinfo($name,$email,$gender,$dob);
+    $updateInfo= updateuserinfo($name,$email,$gender,$dob, $username);
 
     if ($updateInfo)
     {

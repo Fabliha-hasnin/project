@@ -125,7 +125,7 @@ function updateDeadline($projectName , $newdeadline )
         }
     }
 
-    function getAllMemberAdded()
+    function getAllTeamMember()
     {
         $con = getConnection();
         $sql = "SELECT * FROM addmember";

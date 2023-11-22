@@ -37,7 +37,7 @@ if (isset($_SESSION['flag']))
 
     </tr>
     <tr align="center">
-        <td colspan="2"> Copyright c 2017 </td>
+        <td colspan="2"> Copyright c 2023 </td>
     </tr>
 </body>
 </html>

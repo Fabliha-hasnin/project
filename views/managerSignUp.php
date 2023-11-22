@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu</title>
+    <title>Manager Sign Up</title>
+    <script src = "../event(js)/signupcheck.js"></script>
     <style>  
         td { vertical-align: top; }
         .center-fieldset {

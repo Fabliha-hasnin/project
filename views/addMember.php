@@ -40,7 +40,7 @@
             </div>
           <li> <a href="./viewprof.php"> View profile </a> </li>
           <li> <a href="./editprof.php"> Edit profile </a> </li>
-          <!-- <li> <a href="./changeprofpic.php"> Change profile photo </a> </li> -->
+          <li> <a href="./changeprofpic.php"> Change profile photo </a> </li>
           <li> <a href="./changepass.php"> Change password </a> </li>
          </ul>
      </td>
@@ -83,7 +83,7 @@
  
     </tr>
     <tr align="center">
-        <td colspan="2"> Copyright c 2017 </td>
+        <td colspan="2"> Copyright c 2023 </td>
     </tr>
 </body>
 </html>

@@ -7,6 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Collaborative Task Management</title>
+    <script src="../event(js)/setprioritycheck.js"></script>
     <style>
         td { vertical-align: top; }
     </style>
@@ -38,7 +39,7 @@
           <li> <a href="./changepass.php"> Change password </a> </li>
                 </td>
 
-                <form method="POST" action="">
+                <form method="POST" action="../controller/setTaskPrioritycheck.php" onsubmit="return getpriority()" >
                 <td width="70%">
                     <div>
                         <h2>Set Task Priority</h2>
@@ -50,27 +51,27 @@
                            $projectTypes = getProjectType();
                         ?> <hr>
 
-                    <select name="project_name">
+                    <select name="project_name" id="project_name">
                         <option value="">Select Project Name</option>
                         <?php foreach ($projectNames as $projectName) : ?>
                             <option value="<?= $projectName ?>"><?= $projectName ?></option>
                         <?php endforeach; ?>
                     </select>
 
-                    <select name="project_type">
+                    <select name="project_type" id="project_type">
                     <option value="">Select Project Type</option>
                     <?php foreach ($projectTypes as $projectType) : ?>
                         <option value="<?= $projectType ?>"><?= $projectType ?></option>
                         <?php endforeach; ?>
                     </select>
 
-                    <b>Set Priority:</b> <input type="text" name="priority_task" value="" /><br><br>
-                    <b>Set Deadline:</b> <input type="date" name="deadline" value="" /><br><br>
-                    <input type="reset" name="" value="Reset" /> <input type="submit" name="insert_project" value="Submit" /><br><br>
+                    <b>Set Priority:</b> <input type="text" name="priority_task" id="priority_task"  /><br><br>
+                    <b>Set Deadline:</b> <input type="date" name="deadline" id="deadline"  /><br><br>
+                    <input type="reset" name="" value="Reset" /> <input type="submit" name="insert_project" value="Submit" onclick="getpriority()" /><br><br>
                 </td>
             </tr>
             <tr align="center">
-                <td colspan="2">Copyright &copy; 2017</td>
+                <td colspan="2">Copyright c 2023</td>
             </tr>
         </table>
     </form>

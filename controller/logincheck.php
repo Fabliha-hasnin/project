@@ -2,14 +2,8 @@
 require_once('../model/usermodel.php');
 session_start();
 
-if (isset($_COOKIE['username']) && isset($_COOKIE['password'])) {
-    $username = $_COOKIE['username'];
-    $password = $_COOKIE['password'];
-} else {
-    $username = $password = "";
-}
-
 // Check if the form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
@@ -27,8 +21,9 @@ if (isset($_COOKIE['username']) && isset($_COOKIE['password'])) {
         $_SESSION['user'] = $user;
         $_SESSION['flag'] = 'true';
         header('location: ../views/ManagerMenu.php');
+        exit(); // Make sure to exit after redirection
     } else {
         echo "invalid user!";
     }
-
+}
 ?>
